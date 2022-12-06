@@ -41,5 +41,50 @@ namespace R5T.F0085
 				solutionFilePath,
 				solutionFile);
 		}
-	}
+
+		public async Task ModifySolutionFile(
+			string solutionFilePath,
+			Func<SolutionFile, Task> solutionFileAction = default)
+		{
+			await F0024.SolutionFileOperator.Instance.InModifyContext(
+				solutionFilePath,
+				// Ignore the solution file path.
+				async (solutionFile, _) =>
+				{
+					await F0000.ActionOperator.Instance.Run(
+						solutionFileAction,
+						solutionFile);
+				});
+		}
+
+        public async Task ModifySolutionFile(
+            string solutionFilePath,
+            Action<SolutionFile> solutionFileAction = default)
+        {
+            await F0024.SolutionFileOperator.Instance.InModifyContext(
+                solutionFilePath,
+                // Ignore the solution file path.
+                (solutionFile, _) =>
+                {
+                    F0000.ActionOperator.Instance.Run(
+                        solutionFileAction,
+                        solutionFile);
+
+					return Task.CompletedTask;
+                });
+        }
+
+        public void UpgradeSolutionFile_ToVS2022(SolutionFile solutionFile)
+		{
+			solutionFile.VersionInformation = VersionInformationOperations.Instance.Create_VS2022();
+		}
+
+        public async Task UpgradeSolutionFile_ToVS2022(string solutionFilePath)
+		{
+			await this.ModifySolutionFile(
+				solutionFilePath,
+				this.UpgradeSolutionFile_ToVS2022);
+		}
+
+    }
 }
