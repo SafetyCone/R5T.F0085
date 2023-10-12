@@ -125,8 +125,8 @@ namespace R5T.F0085
                 (solutionFile, _) =>
                 {
                     F0000.ActionOperator.Instance.Run(
-                        solutionFileAction,
-                        solutionFile);
+                        solutionFile,
+                        solutionFileAction);
 
 					return Task.CompletedTask;
                 });
