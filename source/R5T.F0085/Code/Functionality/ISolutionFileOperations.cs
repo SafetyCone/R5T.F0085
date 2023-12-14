@@ -86,7 +86,7 @@ namespace R5T.F0085
                 IVisualStudioVersionStrings.Version_15_Constant => VisualStudioVersion.Version_2017,
                 IVisualStudioVersionStrings.Version_16_Constant => VisualStudioVersion.Version_2019,
                 IVisualStudioVersionStrings.Version_17_Constant => VisualStudioVersion.Version_2022,
-                _ => throw F0000.SwitchOperator.Instance.GetUnrecognizedSwitchValueException(versionString, "Visual Studio Version String"),
+                _ => throw F0000.SwitchOperator.Instance.Get_UnrecognizedSwitchValueException(versionString, "Visual Studio Version String"),
             };
 
             return visualStudioVersion;
