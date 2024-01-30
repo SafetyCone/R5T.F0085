@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using R5T.F0024;
+using R5T.F0024.F001;
 using R5T.F0024.T001;
 using R5T.T0132;
 
@@ -78,7 +78,7 @@ namespace R5T.F0085
             var versionDescription = solutionFile.VersionInformation.VersionDescription;
 
             var versionString = versionDescription.Split(
-                Z0000.Characters.Instance.Space)
+                Instances.Characters.Space)
                 .Last();
 
             var visualStudioVersion = versionString switch
@@ -86,7 +86,7 @@ namespace R5T.F0085
                 IVisualStudioVersionStrings.Version_15_Constant => VisualStudioVersion.Version_2017,
                 IVisualStudioVersionStrings.Version_16_Constant => VisualStudioVersion.Version_2019,
                 IVisualStudioVersionStrings.Version_17_Constant => VisualStudioVersion.Version_2022,
-                _ => throw F0000.SwitchOperator.Instance.Get_UnrecognizedSwitchValueException(versionString, "Visual Studio Version String"),
+                _ => throw Instances.SwitchOperator.Get_UnrecognizedSwitchValueException(versionString, "Visual Studio Version String"),
             };
 
             return visualStudioVersion;
@@ -109,9 +109,9 @@ namespace R5T.F0085
 				// Ignore the solution file path.
 				async (solutionFile, _) =>
 				{
-					await F0000.ActionOperator.Instance.Run(
-						solutionFileAction,
-						solutionFile);
+					await Instances.ActionOperator.Run(
+						solutionFile,
+						solutionFileAction);
 				});
 		}
 
@@ -124,7 +124,7 @@ namespace R5T.F0085
                 // Ignore the solution file path.
                 (solutionFile, _) =>
                 {
-                    F0000.ActionOperator.Instance.Run(
+                    Instances.ActionOperator.Run(
                         solutionFile,
                         solutionFileAction);
 
@@ -150,7 +150,7 @@ namespace R5T.F0085
 		{
 			if(createBackupFile)
 			{
-				F0002.FileSystemOperator.Instance.CreateBackupFile(
+                Instances.FileSystemOperator.Create_BackupFile(
 					solutionFilePath);
 			}
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using R5T.F0000;
 using R5T.F0024.T001;
 using R5T.T0132;
 
@@ -27,7 +26,7 @@ namespace R5T.F0085
         public SolutionFile CreateSolutionFile(
             IEnumerable<Action<SolutionFile>> modifiers)
         {
-            var solutionFile = ConstructionOperator.Instance.Create(
+            var solutionFile = Instances.ConstructionOperator.Create(
                 SolutionFileObjectOperations.Instance.New,
                 modifiers);
 
